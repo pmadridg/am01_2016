@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="20dp">
+        android:paddingLeft="27dp">
 
         <TextView
             android:id="@+id/textView4"
@@ -46,7 +46,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <RadioGroup
-            android:id="@+id/rbGenero"
+            android:id="@+id/rgTipoDocument"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -79,6 +79,7 @@
 
 
        <EditText
+           android:id="@+id/etDocument"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="7dp"
@@ -87,6 +88,7 @@
            android:hint="Documento" />
 
        <EditText
+           android:id="@+id/etName"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="7dp"
@@ -95,6 +97,7 @@
            android:hint="Nombres" />
 
        <EditText
+           android:id="@+id/etLastName1"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="7dp"
@@ -103,6 +106,7 @@
            android:hint="Apellido Paterno" />
 
        <EditText
+           android:id="@+id/etLastName2"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="7dp"
@@ -116,7 +120,7 @@
            android:padding="5dp">
 
            <TextView
-               android:id="@+id/textView3"
+               android:id="@+id/tvFecha"
                android:layout_width="0dp"
                android:layout_weight="0.6"
                android:textSize="18sp"
@@ -131,8 +135,8 @@
                android:layout_height="wrap_content"
                android:text="Seleccionar"
                android:textSize="18sp"
-               android:paddingBottom="3dp"
-               android:paddingTop="3dp"
+               android:paddingBottom="4dp"
+               android:paddingTop="4dp"
                android:gravity="center_horizontal"
                android:background="@drawable/shape_picker"
                android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -140,6 +144,7 @@
        </LinearLayout>
 
        <EditText
+           android:id="@+id/etPhone"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="7dp"
@@ -149,6 +154,7 @@
            android:hint="Teléfono" />
 
        <EditText
+           android:id="@+id/etEmail"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="7dp"
@@ -157,6 +163,7 @@
            android:hint="Email" />
 
        <Button
+           android:id="@+id/btnSignUp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:textColor="@color/white"

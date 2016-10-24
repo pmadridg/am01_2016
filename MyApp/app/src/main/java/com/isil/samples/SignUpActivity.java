@@ -29,6 +29,10 @@ import android.widget.Toast;
 public class SignUpActivity extends Activity{
 
     private TextView txtfecnac;
+    private EditText etDocument,etName,etLastName1,etLastName2,etEmail,etPhone;
+    private RadioGroup rgTipoDocument;
+    private Button btnSignUp;
+    private int idNro=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,15 @@ public class SignUpActivity extends Activity{
     private void app() {
         // TODO Auto-generated method stub
         txtfecnac =(TextView)findViewById(R.id.lblfecnac);
+        etDocument =(EditText)findViewById(R.id.etDocument);
+        etName =(EditText)findViewById(R.id.etName);
+        etLastName1 =(EditText)findViewById(R.id.etLastName1);
+        etLastName2 =(EditText)findViewById(R.id.etLastName2);
+        etEmail =(EditText)findViewById(R.id.etEmail);
+        etPhone =(EditText)findViewById(R.id.etPhone);
+        rgTipoDocument =(RadioGroup)findViewById(R.id.rgTipoDocument);
 
+        btnSignUp =(Button)findViewById(R.id.btnSignUp);
 
         txtfecnac.setTag(null);
         events();
@@ -55,7 +67,151 @@ public class SignUpActivity extends Activity{
                 showDialog(100);
             }
         });
+        btnSignUp.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(validateFormError())
+                {
+                    Toast.makeText(SignUpActivity.this, "Enviando al servidor...",
+                            Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    Toast.makeText(SignUpActivity.this, "Revisar campos",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        rgTipoDocument.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rbN:
+                        idNro = 1;
+                        break;
+                    case R.id.rbE:
+                        idNro = 2;
+                        break;
+                }
+            }
+        });
 
+
+    }
+
+    private boolean validateForm()
+    {
+        String document= etDocument.getText().toString().trim();
+        String name= etName.getText().toString().trim();
+        String lastName1= etLastName1.getText().toString().trim();
+        String lastName2= etLastName2.getText().toString().trim();
+        String email= etEmail.getText().toString().trim();
+        String phone= etPhone.getText().toString().trim();
+
+
+        //genero
+        Log.v("CONSOLE", "genero " + idNro);
+        if(idNro==0)return false;
+
+        if(document.isEmpty())return false;
+        if(name.isEmpty())return false;
+        if(lastName1.isEmpty())return false;
+        if(lastName2.isEmpty())return false;
+        if(email.isEmpty())return false;
+        if(phone.isEmpty())return false;
+
+        //fecha nacimiento
+        Object fnac= txtfecnac.getTag();
+        if(fnac==null) return false;
+
+        return true;
+    }
+
+    private boolean validateFormError()
+    {
+        String document= etDocument.getText().toString().trim();
+        String name= etName.getText().toString().trim();
+        String lastName1= etLastName1.getText().toString().trim();
+        String lastName2= etLastName2.getText().toString().trim();
+        String email= etEmail.getText().toString().trim();
+        String phone= etPhone.getText().toString().trim();
+
+
+
+        Log.v("CONSOLE", "genero " + idNro);
+        if(idNro==0){
+            Toast.makeText(SignUpActivity.this, "Seleccionar Documento",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(document.isEmpty())
+        {
+            etDocument.setError("Campo incompleto");
+            return false;
+        }
+
+        if(name.isEmpty())
+        {
+            etName.setError("Campo incompleto");
+            return false;
+        }
+        if(lastName1.isEmpty())
+        {
+            etLastName1.setError("Campo incompleto");
+            return false;
+        }
+        if(lastName2.isEmpty())
+        {
+            etLastName2.setError("Campo incompleto");
+            return false;
+        }
+        //fecha nacimiento
+        Object fnac= txtfecnac.getTag();
+        if(fnac==null) {
+            Toast.makeText(SignUpActivity.this, "Seleccionar Fecha",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(phone.isEmpty())
+        {
+            etPhone.setError("Campo incompleto");
+            return false;
+        }
+
+        if(email.isEmpty()){
+            etEmail.setError("Campo incompleto");
+            return false;
+        }
+
+
+        if(!isEmailValid(email)){
+            etEmail.setError("E-mail inválido");
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean isEmailValid(String email) {
+        String regExpn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if(matcher.matches())
+            return true;
+        else
+            return false;
     }
 
     @Override
