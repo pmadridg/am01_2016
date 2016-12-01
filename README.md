@@ -29,6 +29,6 @@ String name | String nombre | String name
 String Category | String categoria | String description
 String location | String direccion | String addedDate
 int schedule | String telefono|String doctor
-|String descripcion||String spec
-int photo|int photo
+|String descripcion|int photo|String spec
+int photo|
 
